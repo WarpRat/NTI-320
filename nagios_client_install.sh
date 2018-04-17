@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt-get install -y nagios-nrpe-server nagios-plugins
-sed -i 's/allowed_hosts=127.0.0.1/allowed_hosts=127.0.0.1, 10.138.0.5/g' /etc/nagios/nrpe.cfg
+sed -i 's/allowed_hosts=127.0.0.1/allowed_hosts=127.0.0.1, 10.138.0.3/g' /etc/nagios/nrpe.cfg
 
 sed -i 's/check_hda1/check_disk/g' /etc/nagios/nrpe.cfg
 sed -i 's/dev\/hda1/dev\/sda1/g' /etc/nagios/nrpe.cfg
