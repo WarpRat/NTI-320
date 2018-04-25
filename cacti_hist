@@ -1,0 +1,36 @@
+    1  yum -y install cacti
+    2  yum install -y mariadb
+    3  yum install -y mariadb-server
+    4  yum install -y php-process php-gd php mod_php
+    5  systemctl enable nariadb httpd snmpd
+    6  systemctl enable mariadb httpd snmpd
+    7  systemctl restart mariadb httpd snmpd
+    8  mysqladmin -u root password ********** 
+    9  mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -p mysql
+   10  cat /usr/share/zoneinfo/America/Los_Angeles 
+   11  mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -p mysql
+   12  echo "create database cacti;
+GRANT ALL ON cacti.* to cacti@localhost IDENTIFIED BY '********';
+FLUSH privileges;
+
+GRANT SELECT ON mysql.time_zone_name TO cacti@localhost;
+FLUSH privileges;" > /tmp/cacti.sql
+   13  mysql -u root -p < /tmp/cacti.sql 
+   14  rpm -ql cacti | grep cacti.sql
+   15  cacloc=$(rpm -ql cacti | grep cacti.sql)
+   16  echo $cacloc
+   17  msql cacti < $cacloc -u cacti -p
+   18  mysql cacti < $cacloc -u cacti -p
+   19  vim /etc/cacti/db.php 
+   20  vim /etc/httpd/conf.d/cacti.conf 
+   21  systemctl restart httpd
+   22  vim /etc/cron.d/cacti 
+   23  setenforce 0
+   24  cd ..
+   25  cd /etc
+   26  grep date.time php.ini 
+   27  vim php.ini 
+   28  systemctl restart php
+   29  systemctl restart httpd
+   30  history
+   31  history > cacti_hist
