@@ -61,7 +61,7 @@ sed -i "s/^#//" /etc/cron.d/cacti
 setenforce 0
 
 #Set the timezone in the php configuration file
-sed -i "s/;date.timezone =.*/date.timezone = America/Los_Angeles/" /etc/php.ini
+sed -i "s/;date.timezone =.*/date.timezone = America\/Los_Angeles/" /etc/php.ini
 
 #Restart apache
 systemctl restart httpd
