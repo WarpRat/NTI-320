@@ -1,7 +1,10 @@
 #!/bin/bash
 #Install a nagios server
 
+yum -y install epel-release #not nessecary on GCP but including for portability
+yum -y update
 yum -y install nagios
+yum -y install nagios-plugins-all
 
 systemctl enable nagios
 systemctl start nagios
