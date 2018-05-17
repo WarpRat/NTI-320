@@ -10,6 +10,18 @@ baseurl = http://yum.mariadb.org/10.2/centos7-amd64
 gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
 gpgcheck=1" > /etc/yum.repos.d/MariaDB.repo
 
+#Get the ip address of the first instance with repo in the name - adjust with for loop to add multiple repos at once
+repo_ip=$(gcloud compute instance list | grep repo | sed '/s/\s\{1,\}/ /g' | cut -d ' ' -f 4 | head -n 1)
+
+echo "[nti-320]
+name=Extra Packages for Centos from NTI-320 7 - $basearch
+#baseurl=http://download.fedoraproject.org/pub/epel/7/$basearch <- example epel repo
+# Note, this is putting repodata at packages instead of 7 and our path is a hack around that.
+baseurl=http://$repo_ip/centos/7/extras/x86_64/Packages/
+enabled=1
+gpgcheck=0
+" > /etc/yum.repos.d/NTI-320.repo
+
 #Generate radom passwords
 openssl rand -base64 32 > /root/.sql_admin_pass
 openssl rand -base64 32 > /root/.cacti_pass
@@ -18,7 +30,7 @@ openssl rand -base64 32 > /root/.cacti_pass
 yum -y update
 yum -y install cacti
 yum -y install mariadb-server php-process php-gd php mod_php
-yum -y php-process php-gd php mod_php
+yum -y install php-process php-gd php mod_php
 
 #Start apache, maria, and snmp on boot
 systemctl enable mariadb httpd snmpd
