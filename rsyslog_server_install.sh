@@ -27,7 +27,7 @@ echo "command[check_mem]=/usr/lib/nagios/plugins/check_mem.sh -w 80 -c 90" >> /e
 
 
 #Get the ip address of the first instance with repo in the name - adjust with for loop to add multiple repos at once
-repo_ip=$(gcloud compute instance list | grep repo | sed '/s/\s\{1,\}/ /g' | cut -d ' ' -f 4 | head -n 1)
+repo_ip=$(gcloud compute instances list | grep repo | sed '/s/\s\{1,\}/ /g' | cut -d ' ' -f 4 | head -n 1)
 
 echo "[nti-320]
 name=Extra Packages for Centos from NTI-320 7 - $basearch
