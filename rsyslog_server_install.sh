@@ -5,10 +5,10 @@
 
 
 #Open up TCP and UDP ports to accept logs
-sed -i '/^#$ModLoad imupd/ s/^#/^/g' /etc/rsyslog.conf
-sed -i '/^#$ModLoad imtcp/ s/^#/^/g' /etc/rsyslog.conf
-sed -i '/^#$UDPServerRun/ s/^#/^/g' /etc/rsyslog.conf
-sed -i '/^#$InputTCPServerRun/ s/^#/^/g' /etc/rsyslog.conf
+sed -i '/^#$ModLoad imudp/ s/^#//g' /etc/rsyslog.conf
+sed -i '/^#$ModLoad imtcp/ s/^#//g' /etc/rsyslog.conf
+sed -i '/^#$UDPServerRun/ s/^#//g' /etc/rsyslog.conf
+sed -i '/^#$InputTCPServerRun/ s/^#//g' /etc/rsyslog.conf
 
 #Restart syslog server
 systemctl restart rsyslog
