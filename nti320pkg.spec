@@ -6,7 +6,7 @@ Summary: 	A collection of configuration changes
 Group:		NTI-320
 License:	GPL2+
 URL:		https://github.com/WarpRat/NTI-320
-Source0:        https://github.com/WarpRat/NTI-320/nti320pkg-0.1.tar.gz
+Source0:    https://github.com/WarpRat/NTI-320/nti320pkg-0.1.tar.gz
 
 BuildRequires:	gcc, python >= 1.3
 Requires:	bash, net-snmp, net-snmp-utils, nrpe, nagios-plugins-all 
@@ -26,8 +26,8 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/lib64/nagios/plugins/
 mkdir -p %{buildroot}/etc/nrpe.d/
 
-install -m 0755 nti-sanity.sh %{buildroot}/usr/lib64/nagios/plugins/
-install -m 0755 check-mem.sh %{buildroot}/usr/lib64/nagios/plugins/
+install -m 0755 check_nfs_dirs.sh %{buildroot}/usr/lib64/nagios/plugins/
+install -m 0755 check_mem.sh %{buildroot}/usr/lib64/nagios/plugins/
 
 install -m 0744 nti320.cfg %{buildroot}/etc/nrpe.d/
 
@@ -35,8 +35,8 @@ install -m 0744 nti320.cfg %{buildroot}/etc/nrpe.d/
 
 %files					
 %defattr(-,root,root)	
-/usr/lib64/nagios/plugins/nti-sanity.sh
-
+/usr/lib64/nagios/plugins/check_nfs_dirs.sh
+/usr/lib64/nagios/plugins/check_mem.sh
 
 %config
 /etc/nrpe.d/nti320.cfg
@@ -66,4 +66,8 @@ systemctl restart nrpe
 %postun
 rm /thisworked
 rm /etc/nrpe.d/nti320.cfg
+
 %changelog				# changes you (and others) have made and why
+* Thursday 5/31/18 Robert Russell <robertcharlesrussell@gmail.com>
+- Added custom nrpe scripts
+- Added post script items that pull metadata from the gcloud project-wide metadata server
