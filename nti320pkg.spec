@@ -67,7 +67,7 @@ systemctl restart nrpe
 rm /thisworked
 rm /etc/nrpe.d/nti320.cfg
 
-%changelog				# changes you (and others) have made and why
-* Thursday 5/31/18 Robert Russell <robertcharlesrussell@gmail.com>
-- Added custom nrpe scripts
-- Added post script items that pull metadata from the gcloud project-wide metadata server
+%changelog			# changes you (and others) have made and why
+* Thu May 31 2018 Robert Russell <robertcharlesrussell@gmail.com>
+- Added custom nrpe commands
+- Added post install script instructions to pull down info from gcloud project metadata server
